@@ -1,0 +1,72 @@
+/* ==========================
+Squarics
+   ========================== */
+
+/* Navbar */
+.navbar {
+  background-color: var(--sk-dark-1) !important;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  color: var(--sk-text-light);
+  font-weight: 700;
+  padding: 1rem 2rem;
+}
+
+/* Entire Status Page */
+#status-page {
+  background: linear-gradient(120deg, var(--sk-bg-start), var(--sk-bg-end));
+  background-size: 200% 200%;
+  animation: bgShift 12s ease-in-out infinite alternate;
+  min-height: 100vh;
+  color: var(--sk-text-light);
+  padding: 1.5rem;
+}
+
+/* Status boxes */
+.shadow-box {
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--sk-radius);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.shadow-box:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-5px) scale(1.03);
+}
+
+/* Monitor name */
+.monitor-name {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--sk-accent);
+  text-shadow: 0 0 5px rgba(46, 204, 113, 0.8);
+}
+
+/* Monitor status */
+.monitor-status {
+  font-weight: 600;
+  color: var(--sk-text-light);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Pulse animation for important status monitors */
+.shadow-box.important {
+  animation: pulseBox 2.4s infinite;
+}
+@keyframes pulseBox {
+  0%   { box-shadow: 0 0 0 0 rgba(46,204,113,0.7); }
+  70%  { box-shadow: 0 0 0 12px rgba(46,204,113,0); }
+  100% { box-shadow: 0 0 0 0 rgba(46,204,113,0); }
+}
+
+/* Re-using your bgShift animation */
+@keyframes bgShift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
