@@ -1,0 +1,39 @@
+body {
+  background: linear-gradient(120deg, #2c3e50, #3498db);
+  animation: bgShift 10s infinite alternate;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.5s ease;
+}
+
+@keyframes bgShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.monitor-box {
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.monitor-box:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.navbar, .footer {
+  background-color: #1a1a2e !important;
+}
+
+.button, input, select {
+  background-color: #34495e !important;
+  color: white !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
+}
+.button:hover {
+  background-color: #2ecc71 !important;
+  color: black !important;
+}
