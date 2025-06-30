@@ -1,0 +1,391 @@
+/* ===============================
+   Luminara Theme for Uptime Kuma
+   Sleek, luminous, responsive UI
+   =============================== */
+
+/* -------- Root Variables -------- */
+:root {
+  --min-item-width: 320px;
+  --grid-gap: 1.25rem;
+  --item-padding: 1.2rem;
+  --border-radius: 14px;
+  --transition-fast: 0.3s ease-in-out;
+
+  /* Dark Mode Colors */
+  --bg-dark: #0b111a;
+  --bg-card-dark: rgba(20, 26, 40, 0.8);
+  --bg-glass-dark: rgba(20, 26, 40, 0.5);
+  --text-dark: #d8dbe7;
+  --accent-dark: #4fe8a3;
+  --danger-dark: #ff6666;
+  --maintenance-dark: #f9a825;
+  --border-dark: rgba(70, 85, 120, 0.3);
+  --hover-dark: rgba(30, 40, 65, 0.7);
+
+  /* Light Mode Colors */
+  --bg-light: #f4f6f8;
+  --bg-card-light: rgba(255, 255, 255, 0.85);
+  --bg-glass-light: rgba(255, 255, 255, 0.6);
+  --text-light: #1e1e2e;
+  --accent-light: #26a69a;
+  --danger-light: #d9534f;
+  --maintenance-light: #f0ad4e;
+  --border-light: rgba(180, 180, 180, 0.4);
+  --hover-light: rgba(230, 230, 230, 0.8);
+}
+
+/* -------- Base Styles -------- */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: var(--bg-dark);
+  color: var(--text-dark);
+  transition: background 0.4s ease, color 0.4s ease;
+  min-height: 100vh;
+}
+
+/* Light mode toggle */
+body[data-theme="light"] {
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+
+/* -------- Background Gradient Animation -------- */
+body {
+  background: linear-gradient(135deg, #0b111a, #1a2738, #0b111a);
+  background-size: 300% 300%;
+  animation: luminara-bgShift 20s ease infinite;
+}
+
+body[data-theme="light"] {
+  background: linear-gradient(135deg, #f4f6f8, #d0d7de, #f4f6f8);
+  background-size: 300% 300%;
+  animation: luminara-bgShiftLight 20s ease infinite;
+}
+
+@keyframes luminara-bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes luminara-bgShiftLight {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* -------- Container & Grid -------- */
+.container {
+  max-width: 96%;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+.monitor-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min-item-width), 1fr));
+  gap: var(--grid-gap);
+}
+
+/* -------- Monitor Cards -------- */
+.monitor-list > div {
+  background-color: var(--bg-card-dark);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-dark);
+  padding: var(--item-padding);
+  box-shadow:
+    0 8px 16px rgba(0,0,0,0.35),
+    inset 0 0 30px rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: default;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+body[data-theme="light"] .monitor-list > div {
+  background-color: var(--bg-card-light);
+  border: 1px solid var(--border-light);
+  box-shadow:
+    0 8px 16px rgba(0,0,0,0.1),
+    inset 0 0 30px rgba(0, 0, 0, 0.03);
+}
+
+.monitor-list > div:hover {
+  background-color: var(--hover-dark);
+  transform: translateY(-6px);
+  box-shadow:
+    0 14px 24px rgba(0,0,0,0.5),
+    inset 0 0 45px var(--accent-dark);
+}
+
+body[data-theme="light"] .monitor-list > div:hover {
+  background-color: var(--hover-light);
+  transform: translateY(-6px);
+  box-shadow:
+    0 14px 24px rgba(0,0,0,0.1),
+    inset 0 0 45px var(--accent-light);
+}
+
+/* -------- Monitor Title -------- */
+.monitor-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: inherit;
+  text-align: center;
+  margin-bottom: 0.6rem;
+  user-select: none;
+}
+
+/* -------- Status Badge -------- */
+.badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 10px;
+  user-select: none;
+  align-self: center;
+  margin-bottom: 0.75rem;
+  background-color: #2c2f38;
+  color: var(--text-dark);
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body[data-theme="light"] .badge {
+  background-color: #ddd;
+  color: var(--text-light);
+  box-shadow: 0 0 6px rgba(255,255,255,0.6);
+}
+
+/* Status colors */
+.badge.up {
+  background-color: var(--accent-dark);
+  color: #0f1e15;
+  box-shadow: 0 0 8px var(--accent-dark);
+}
+
+body[data-theme="light"] .badge.up {
+  background-color: var(--accent-light);
+  color: #004d40;
+  box-shadow: 0 0 8px var(--accent-light);
+}
+
+.badge.down {
+  background-color: var(--danger-dark);
+  color: #330000;
+  box-shadow: 0 0 8px var(--danger-dark);
+}
+
+body[data-theme="light"] .badge.down {
+  background-color: var(--danger-light);
+  color: #651d1d;
+  box-shadow: 0 0 8px var(--danger-light);
+}
+
+.badge.maintenance {
+  background-color: var(--maintenance-dark);
+  color: #4b3a00;
+  box-shadow: 0 0 8px var(--maintenance-dark);
+}
+
+body[data-theme="light"] .badge.maintenance {
+  background-color: var(--maintenance-light);
+  color: #664d00;
+  box-shadow: 0 0 8px var(--maintenance-light);
+}
+
+/* -------- Info Rows -------- */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-top: 0.3rem;
+  user-select: none;
+}
+
+body[data-theme="light"] .info-row {
+  color: var(--text-light);
+}
+
+/* -------- Status Bar -------- */
+.status-bar {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 1rem;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+  background-color: #222;
+  transition: background-color 0.3s ease;
+}
+
+body[data-theme="light"] .status-bar {
+  background-color: #ccc;
+}
+
+.status-bar > div {
+  height: 100%;
+  transition: flex-grow 0.6s ease;
+}
+
+.status-bar .up {
+  background: var(--accent-dark);
+  box-shadow: 0 0 8px var(--accent-dark);
+}
+
+body[data-theme="light"] .status-bar .up {
+  background: var(--accent-light);
+  box-shadow: 0 0 8px var(--accent-light);
+}
+
+.status-bar .down {
+  background: var(--danger-dark);
+  box-shadow: 0 0 8px var(--danger-dark);
+}
+
+body[data-theme="light"] .status-bar .down {
+  background: var(--danger-light);
+  box-shadow: 0 0 8px var(--danger-light);
+}
+
+.status-bar .maintenance {
+  background: var(--maintenance-dark);
+  box-shadow: 0 0 8px var(--maintenance-dark);
+}
+
+body[data-theme="light"] .status-bar .maintenance {
+  background: var(--maintenance-light);
+  box-shadow: 0 0 8px var(--maintenance-light);
+}
+
+/* -------- Navbar & Footer -------- */
+.navbar, footer {
+  background: var(--bg-card-dark);
+  color: var(--text-dark);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+body[data-theme="light"] .navbar, 
+body[data-theme="light"] footer {
+  background: var(--bg-card-light);
+  color: var(--text-light);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* -------- Buttons & Inputs -------- */
+button, .button,
+input[type="submit"],
+input[type="button"],
+input, select, textarea {
+  background-color: var(--bg-glass-dark);
+  color: var(--text-dark);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  user-select: none;
+}
+
+body[data-theme="light"] button,
+body[data-theme="light"] .button,
+body[data-theme="light"] input[type="submit"],
+body[data-theme="light"] input[type="button"],
+body[data-theme="light"] input,
+body[data-theme="light"] select,
+body[data-theme="light"] textarea {
+  background-color: var(--bg-glass-light);
+  color: var(--text-light);
+  border: 1px solid var(--border-light);
+}
+
+button:hover, .button:hover,
+input[type="submit"]:hover, input[type="button"]:hover {
+  background-color: var(--accent-dark);
+  color: #0b111a;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px var(--accent-dark);
+}
+
+body[data-theme="light"] button:hover,
+body[data-theme="light"] .button:hover,
+body[data-theme="light"] input[type="submit"]:hover,
+body[data-theme="light"] input[type="button"]:hover {
+  background-color: var(--accent-light);
+  color: #f4f6f8;
+  box-shadow: 0 8px 16px var(--accent-light);
+}
+
+/* Focus states */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-dark);
+}
+
+body[data-theme="light"] input:focus,
+body[data-theme="light"] select:focus,
+body[data-theme="light"] textarea:focus {
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+/* -------- Scrollbar Styling -------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-dark);
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+}
+
+body[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: var(--accent-light);
+}
+
+/* -------- Animations -------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.monitor-list > div {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 768px) {
+  .monitor-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  .info-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
