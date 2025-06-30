@@ -1,0 +1,123 @@
+/* === Retro-Pixel Animated Theme for Uptime Kuma === */
+/* Font */
+body, *, *::before, *::after {
+  font-family: 'Courier New', monospace !important;
+  box-sizing: border-box;
+}
+
+/* Smooth fade-in for whole app */
+body {
+  animation: fadeInBody 1.5s ease-in forwards;
+  opacity: 0;
+}
+
+/* Backgrounds based on theme */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0a0a0a;
+    color: #cfcfcf;
+  }
+}
+@media (prefers-color-scheme: light) {
+  body {
+    background: #fefefe;
+    color: #111;
+  }
+}
+
+/* === Headings === */
+h1, h2, h3, h4 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: slideIn 1s ease-out;
+}
+
+/* === Panels & Boxes === */
+.panel, .monitor-box, .box, .card {
+  border-radius: 8px;
+  border: 2px dashed #888;
+  padding: 1rem;
+  animation: popIn 0.6s ease-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.panel:hover, .monitor-box:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 12px #00ff99;
+}
+
+/* === Buttons === */
+.button, button, .btn {
+  background: linear-gradient(135deg, #00ccff, #0088ff);
+  border: none;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: pulse 2s infinite;
+}
+.button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 8px #00ffff;
+}
+
+/* === Inputs === */
+input, select, textarea {
+  border: 2px solid #666;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  transition: border-color 0.2s ease;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #00ccff;
+  outline: none;
+  animation: glowFocus 0.5s ease forwards;
+}
+
+/* === Animations === */
+@keyframes fadeInBody {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  0% { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0,255,255, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(0,255,255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,255,255, 0); }
+}
+
+@keyframes glowFocus {
+  from { box-shadow: 0 0 0px transparent; }
+  to { box-shadow: 0 0 10px #00ccff; }
+}
+
+/* === Status LEDs === */
+.status.important {
+  animation: blink 1s infinite alternate;
+}
+@keyframes blink {
+  from { background-color: #ff0000; }
+  to { background-color: #ff5555; }
+}
+
+/* === Scrollbars (Modern Browsers) === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #00ccff;
+  border-radius: 10px;
+}
